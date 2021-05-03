@@ -7,12 +7,12 @@ class CommonSettings(BaseSettings):
 
 
 class ServerSettings(BaseSettings):
-    HOST: str = "0.0.0.0"
+    HOST: str = "127.0.0.1"
     PORT: int = 8000
 
 
 class DatabaseSettings(BaseSettings):
-    DB_URL: str = "mongodb://localhost:27017"
+    DB_URL: str = "mongodb+srv://nghiango:Nghia385685@cluster0.kd12g.mongodb.net/tododb?retryWrites=true&w=majority"
     DB_NAME: str = "TODO"
 
 
