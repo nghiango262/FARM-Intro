@@ -1,7 +1,11 @@
-from typing import Optional
+from typing import Optional, List
 import uuid, datetime
 from pydantic import BaseModel, Field
 
+
+class SubTask(BaseModel):
+    subname: str = Field(...)
+    completed: bool = False
 
 class TaskModel(BaseModel):
     id: str = Field(default_factory=uuid.uuid4, alias="_id")
@@ -10,6 +14,7 @@ class TaskModel(BaseModel):
     create_at: str = Field(...)
     update_at: str = Field(...)
     completed: bool = False
+    subtasks: List[SubTask] = []
 
     class Config:
         allow_population_by_field_name = True
@@ -20,6 +25,7 @@ class TaskModel(BaseModel):
                 "create_at": str(datetime.datetime.now().isoformat()),
                 "update_at": str(datetime.datetime.now().isoformat()),
                 "completed": False,
+                "subtasks": []
 
             }
         }
@@ -40,3 +46,5 @@ class UpdateTaskModel(BaseModel):
                 "completed": True,
             }
         }
+
+

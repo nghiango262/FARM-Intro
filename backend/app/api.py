@@ -7,6 +7,8 @@ from .todo.routers import router as todo_router
 
 app = FastAPI()
 
+app.caiquan="Cái quần"
+
 origins = [
     "http://localhost:3000",
     "localhost:3000",

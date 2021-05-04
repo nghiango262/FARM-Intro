@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Body, Request, HTTPException, status
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-
+import json
 from .models import TaskModel, UpdateTaskModel
 
 router = APIRouter()
@@ -10,6 +10,7 @@ router = APIRouter()
 @router.get("/", response_description="List all tasks")
 async def list_tasks(request: Request):
     tasks = []
+    print(request.app.caiquan)
     for doc in await request.app.mongodb["tasks"].find().to_list(length=100):
         tasks.append(doc)
     return tasks
