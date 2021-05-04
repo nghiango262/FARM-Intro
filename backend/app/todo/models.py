@@ -1,11 +1,14 @@
 from typing import Optional
-import uuid
+import uuid, datetime
 from pydantic import BaseModel, Field
 
 
 class TaskModel(BaseModel):
     id: str = Field(default_factory=uuid.uuid4, alias="_id")
     name: str = Field(...)
+    description: str = Field(...)
+    create_at: str = Field(...)
+    update_at: str = Field(...)
     completed: bool = False
 
     class Config:
@@ -13,19 +16,27 @@ class TaskModel(BaseModel):
         schema_extra = {
             "example": {
                 "name": "Learn FARM Stack",
+                "description": "Mô tả công việc",
+                "create_at": str(datetime.datetime.now().isoformat()),
+                "update_at": str(datetime.datetime.now().isoformat()),
                 "completed": False,
+
             }
         }
 
 
 class UpdateTaskModel(BaseModel):
     name: Optional[str]
+    description: Optional[str]
     completed: Optional[bool]
+    update_at: Optional[str]
 
     class Config:
         schema_extra = {
             "example": {
                 "name": "Learn FARM Stack",
+                "description": "Mô tả công việc",
+                "update_at": str(datetime.datetime.now().isoformat()),
                 "completed": True,
             }
         }
